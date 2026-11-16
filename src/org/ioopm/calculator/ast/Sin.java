@@ -4,4 +4,8 @@ public class Sin extends Unary{
   public Sin(SymbolicExpression operand) {
     super(operand);
   }
+
+  public String getName() {
+    return "sin";
+  }
 }
