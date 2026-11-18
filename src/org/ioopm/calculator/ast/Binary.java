@@ -8,4 +8,19 @@ public class Binary extends SymbolicExpression {
     this.lhs = lhs;
     this.rhs = rhs;
   }
+
+  public String toString() {
+      String left = lhs.toString();
+      String right = rhs.toString();
+
+      if (lhs.getPriority() < this.getPriority()) {
+          left = "(" + left + ")";
+      }
+
+      if (rhs.getPriority() < this.getPriority()) {
+          right = "(" + right + ")";
+      }
+
+      return left + " " + this.getName() + " " + right;
+  }
 }

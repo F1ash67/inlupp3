@@ -14,4 +14,9 @@ public class Constant extends Atom{
   public double getValue() {
     return this.value;
   }
+
+  public String toString() {
+    if(this.value == Math.floor(this.value)) return String.valueOf((int)this.value);
+    return String.valueOf(this.value);
+  }
 }
