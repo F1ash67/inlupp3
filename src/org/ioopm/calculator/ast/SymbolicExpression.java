@@ -15,6 +15,6 @@ public abstract class SymbolicExpression {
   }
 
   public int getPriority() {
-    return 3;
+    return 4;
   }
 }

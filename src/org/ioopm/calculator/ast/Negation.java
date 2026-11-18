@@ -6,6 +6,6 @@ public class Negation extends Unary{
   }
 
   public String getName(){
-    return "Neg";
+    return "neg";
   }
 }

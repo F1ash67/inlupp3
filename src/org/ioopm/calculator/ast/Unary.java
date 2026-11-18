@@ -6,4 +6,8 @@ public class Unary extends SymbolicExpression{
   public Unary (SymbolicExpression operand) {
     this.operand = operand;
   }
+
+  public int getPriority() {
+    return 3;
+  }
 }
