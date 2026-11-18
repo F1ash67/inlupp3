@@ -15,5 +15,18 @@ public class Unary extends SymbolicExpression{
     /// Note how the call to toString() is not necessary
     if(argument.getPriority() > this.getPriority()) return this.getName() + " " + this.argument.toString();
     return this.getName() + "(" + this.argument.toString() + ")";
-}
+  }
+
+  public boolean equals(Object other) {
+    if (other instanceof Unary) {
+      return this.equals((Unary) other);
+    } else {
+      return false;
+    }
+  }
+
+  public boolean equals(Unary other) {
+    /// access a private field of other!
+    return this.getName().equals(other.getName()) && this.argument == other.argument;
+  }
 }

@@ -17,4 +17,8 @@ public abstract class SymbolicExpression {
   public int getPriority() {
     return 4;
   }
+
+  public SymbolicExpression eval() {
+    return this;
+  }
 }
