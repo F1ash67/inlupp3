@@ -6,6 +6,6 @@ public class Cos extends Unary{
   }
 
   public String getName() {
-    return "Cos";
+    return "cos";
   }
 }

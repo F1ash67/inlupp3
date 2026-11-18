@@ -8,4 +8,8 @@ public class Division extends Binary{
   public String getName() {
     return "/";
   }
+
+  public int getPriority() {
+    return 2;
+  }
 }

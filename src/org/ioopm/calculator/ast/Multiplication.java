@@ -8,4 +8,8 @@ public class Multiplication extends Binary {
   public String getName() {
     return "*";
   }
+
+    public int getPriority() {
+    return 2;
+  }
 }

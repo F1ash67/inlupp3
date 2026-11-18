@@ -7,4 +7,8 @@ public class Addition extends Binary{
   public String getName() {
     return "+";
   }
+
+  public int getPriority() {
+    return 1;
+  }
 }
