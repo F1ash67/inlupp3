@@ -34,6 +34,8 @@ public class Binary extends SymbolicExpression {
 
   public boolean equals(Binary other) {
     /// access a private field of other!
-    return this.lhs.equals(other.lhs) && this.rhs.equals(other.rhs);
+    return this.lhs.equals(other.lhs) && 
+            this.rhs.equals(other.rhs) && 
+            this.getName().equals(other.getName());
   } 
 }
