@@ -8,11 +8,8 @@ public class Test {
 
   public void testEvaluating(SymbolicExpression expected, SymbolicExpression e) {
     SymbolicExpression r = e.eval();
-    if (r.equals(expected)) {
-      System.out.println("Passed: " + e);
-    } else {
-      System.out.println("Error: expected '" + expected + "' but got '" + e + "'");
-    }
+    System.out.println(r + "\n");
+    assert expected.equals("" + r) : "Expected '" + expected + "' but got '" + r + "'";
   }
 
   public void main(String[] args) {
