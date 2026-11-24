@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public class Unary extends SymbolicExpression{
+public abstract class Unary extends SymbolicExpression{
   private SymbolicExpression argument;
 
   public Unary (SymbolicExpression argument) {
@@ -9,6 +9,10 @@ public class Unary extends SymbolicExpression{
 
   public int getPriority() {
     return 3;
+  }
+
+  public SymbolicExpression getArg() {
+    return this.argument;
   }
 
   public String toString() {
@@ -27,6 +31,6 @@ public class Unary extends SymbolicExpression{
 
   public boolean equals(Unary other) {
     /// access a private field of other!
-    return this.getName().equals(other.getName()) && this.argument == other.argument;
+    return this.getName().equals(other.getName()) && this.argument.equals((other.argument));
   }
 }

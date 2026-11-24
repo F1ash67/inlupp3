@@ -18,7 +18,5 @@ public abstract class SymbolicExpression {
     return 4;
   }
 
-  public SymbolicExpression eval() {
-    return this;
-  }
+  public abstract SymbolicExpression eval(Environment vars);
 }

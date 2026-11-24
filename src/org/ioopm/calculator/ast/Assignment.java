@@ -13,4 +13,10 @@ public class Assignment extends Binary{
   public int getPriority() {
     return 0;
   }
+
+  public SymbolicExpression eval(Environment vars) {
+    SymbolicExpression val = this.getLhs().eval(vars);
+    vars.put((Variable)this.getRhs(), val);
+    return val;
+  }
 }

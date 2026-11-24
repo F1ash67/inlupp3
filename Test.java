@@ -1,18 +1,18 @@
 import org.ioopm.calculator.ast.*;
 
 public class Test {
-  public void testPrinting(String expected, SymbolicExpression e) {
-    System.out.println(e + "\n");
+  public static void testPrinting(String expected, SymbolicExpression e) {
+    System.out.println("Expected " + expected + " and got " + e + "\n");
     assert expected.equals("" + e) : "Expected '" + expected + "' but got '" + e + "'";
   }
 
-  public void testEvaluating(SymbolicExpression expected, SymbolicExpression e) {
-    SymbolicExpression r = e.eval();
-    System.out.println(r + "\n");
-    assert expected.equals("" + r) : "Expected '" + expected + "' but got '" + r + "'";
+  public static void testEvaluating(SymbolicExpression expected, SymbolicExpression e, Environment vars) {
+    SymbolicExpression r = e.eval(vars);
+    System.out.println( e + " = " + r + "\n");
+    assert expected.equals(r) : "Expected '" + expected + "' but got '" + r + "'";
   }
 
-  public void main(String[] args) {
+  public static void main(String[] args) {
     Constant c1 = new Constant(5);
     Constant c2 = new Constant(2);
     Variable v = new Variable("x");
@@ -25,39 +25,44 @@ public class Test {
     Subtraction s = new Subtraction(c2, a);
     testPrinting("2 - 5 + x", s);
     testPrinting("42", new Constant(42));
-    testPrinting("x", new Variable("x"));
-    testPrinting("sin x", new Sin(new Variable("x")));
-    testPrinting("cos x", new Cos(new Variable("x")));
-    testPrinting("exp x", new Exp(new Variable("x")));
-    testPrinting("log x", new Log(new Variable("x")));
-    testPrinting("neg x", new Negation(new Variable("x")));
+    testPrinting("x", v);
+    testPrinting("sin x", new Sin(v));
+    testPrinting("cos x", new Cos(v));
+    testPrinting("exp x", new Exp(v));
+    testPrinting("log x", new Log(v));
+    testPrinting("neg x", new Negation(v));
     Sin sin = new Sin(a2);
     testPrinting("sin(5 + x * 2)", sin);
     Exp exp = new Exp(m);
     testPrinting("exp((5 + x) * 2)", exp);
 
+    testPrinting("x = 5", new Assignment(v, c1));
+
+    
+    testPrinting("x = (5 + x) * 2", new Assignment(v, m));
+
     SymbolicExpression a3 = new Addition(new Constant(5), new Constant(37));
     SymbolicExpression c3 = new Constant(42);
-    testEvaluating(c3, a3); /// Tests if reducing a returns b (it should!)
+    testEvaluating(c3, a3, new Environment()); /// Tests if reducing a returns b (it should!)
 
     SymbolicExpression c4 = new Constant(6);
     SymbolicExpression s2 = new Subtraction(new Constant(10), new Constant(4));
-    testEvaluating(c4, s2);
+    testEvaluating(c4, s2, new Environment());
 
     SymbolicExpression c6 = new Constant(42);
     SymbolicExpression m3 = new Multiplication(new Constant(6), new Constant(7));
-    testEvaluating(c6, m3);
+    testEvaluating(c6, m3, new Environment());
 
     SymbolicExpression c5 = new Constant(5);
     SymbolicExpression d = new Division(new Constant(20), new Constant(4));
-    testEvaluating(c5, d);
+    testEvaluating(c5, d, new Environment());
 
     testEvaluating(
       new Constant(15),
       new Multiplication(
         new Addition(new Constant(2), new Constant(3)),
         new Subtraction(new Constant(4), new Constant(1))
-      )
+      ), new Environment()
     );
 
     SymbolicExpression expected =
@@ -72,7 +77,7 @@ public class Test {
           new Constant(2)
       );
 
-    testEvaluating(expected, expression);
+    testEvaluating(expected, expression, new Environment());
 
     testEvaluating(
       new Multiplication(
@@ -82,7 +87,7 @@ public class Test {
       new Multiplication(
         new Addition(new Constant(5), new Constant(3)),
         new Variable("x")
-      )
+      ), new Environment()
     );
 
     testEvaluating(
@@ -93,17 +98,23 @@ public class Test {
       new Addition(
         new Variable("x"),
         new Multiplication(new Constant(5), new Constant(2))
-      )
+      ), new Environment()
     );
 
-    testEvaluating(new Constant(-5), new Negation(new Constant(5)));
+    testEvaluating(new Constant(-5), new Negation(new Constant(5)), new Environment());
 
-    testEvaluating(new Constant(0), new Sin(new Constant(0)));
+    testEvaluating(new Constant(0), new Sin(new Constant(0)), new Environment());
 
-    testEvaluating(new Constant(1), new Cos(new Constant(0)));
+    testEvaluating(new Constant(1), new Cos(new Constant(0)), new Environment());
 
-    testEvaluating(new Constant(1), new Exp(new Constant(0)));
+    testEvaluating(new Constant(1), new Exp(new Constant(0)), new Environment());
 
-    testEvaluating(new Constant(0), new Log(new Constant(1)));
+    testEvaluating(new Constant(0), new Log(new Constant(1)), new Environment());
+
+    Environment env = new Environment();
+    Assignment ass = new Assignment(c1, v);
+    testEvaluating(c1, ass, env);
+    System.out.println("a = " + new Variable("x").hashCode() + "\nb = " + new Variable("x").hashCode());
+    testEvaluating(new Constant(20), expression, env);
   }
 }

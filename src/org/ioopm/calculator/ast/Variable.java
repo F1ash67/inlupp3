@@ -12,6 +12,10 @@ public class Variable extends Atom {
     return this.identifier;
   }
 
+  public int hashCode() {
+    return this.identifier.hashCode();
+  }
+
   public boolean equals(Object other) {
     if (other instanceof Variable) {
       return this.equals((Variable) other);
@@ -22,6 +26,12 @@ public class Variable extends Atom {
 
   public boolean equals(Variable other) {
     /// access a private field of other!
-    return this.identifier == other.identifier;
+    return this.identifier.equals(other.identifier);
+  }
+
+  public SymbolicExpression eval(Environment vars) {
+    SymbolicExpression val = vars.get(this);
+    if(val == null) return new Variable(identifier);
+    return val;
   }
 }

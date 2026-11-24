@@ -32,4 +32,8 @@ public class Constant extends Atom{
     /// access a private field of other!
     return this.value == other.value;
   }
+
+  public SymbolicExpression eval(Environment vars) {
+    return new Constant(this.value);
+  }
 }
