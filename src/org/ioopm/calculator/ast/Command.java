@@ -4,4 +4,8 @@ public abstract class Command extends SymbolicExpression{
   public SymbolicExpression eval(Environment vars) {
     throw new RuntimeException("Cannot evaluate a command");
   }
+
+  public boolean isCommand() {
+    return true;
+  }
 }

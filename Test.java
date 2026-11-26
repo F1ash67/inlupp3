@@ -30,7 +30,7 @@ public class Test {
     testPrinting("cos x", new Cos(v));
     testPrinting("exp x", new Exp(v));
     testPrinting("log x", new Log(v));
-    testPrinting("neg x", new Negation(v));
+    testPrinting("-((5 + x) * 2)", new Negation(m));
     Sin sin = new Sin(a2);
     testPrinting("sin(5 + x * 2)", sin);
     Exp exp = new Exp(m);

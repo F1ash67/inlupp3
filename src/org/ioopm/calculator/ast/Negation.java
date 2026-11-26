@@ -6,7 +6,7 @@ public class Negation extends Unary{
   }
 
   public String getName(){
-    return "neg";
+    return "-";
   }
 
   public SymbolicExpression eval(Environment vars) {
