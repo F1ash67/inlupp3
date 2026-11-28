@@ -116,5 +116,23 @@ public class Test {
     testEvaluating(c1, ass, env);
     System.out.println("a = " + new Variable("x").hashCode() + "\nb = " + new Variable("x").hashCode());
     testEvaluating(new Constant(20), expression, env);
+    testEvaluating(new Constant(84), 
+      new Addition(
+        new NamedConstant("Answer"), 
+        new NamedConstant("Answer")), env);
+
+    try {
+      Assignment illegalAssignment = new Assignment(
+        new Constant(21),
+        new NamedConstant("Answer")
+      );
+
+      illegalAssignment.eval(env);
+
+      // If execution reaches this line, no exception was thrown.
+      System.out.println("FAIL: Expected IllegalAssignmentException");
+    } catch (IllegalAssignmentException e) {
+      System.out.println("PASS: IllegalAssignmentException was thrown");
+    }
   }
 }

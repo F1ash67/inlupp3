@@ -15,6 +15,7 @@ public class Assignment extends Binary{
   }
 
   public SymbolicExpression eval(Environment vars) {
+    if(this.getRhs().isConstant()) throw new IllegalAssignmentException(this.getRhs().toString());
     SymbolicExpression val = this.getLhs().eval(vars);
     vars.put((Variable)this.getRhs(), val);
     return val;
